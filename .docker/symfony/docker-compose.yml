@@ -1,6 +1,12 @@
 version: "3.3"
 
 services:
+  symfony:
+    build: .docker
+    container_name: symfony
+    volumes:
+      - .:/application
+      
   xampp:
     container_name: xamp
     image: tomsik68/xampp:${PHP_VERSION}
@@ -8,4 +14,4 @@ services:
       - 22:22
       - 80:80 
     volumes:
-      - ./project:/www
+      - ./app:/www

@@ -1,11 +1,11 @@
 @Echo Off
 
-CALL :checkAvailableApp %1 
+set app=%1
+set project_name=%2
+set list=(xampp symfony python django flask react vue)
+
+CALL :checkAvailableApp %app%
 GOTO :EOF
-
-
-
-
 
 
 :: FUNCTIONS
@@ -18,25 +18,30 @@ ECHO Finished !
 ECHO Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
 docker-compose up -d
-START http://127.0.0.1:80
+START http://127.0.0.1:80/www
 ECHO Web server is UP ! A localhost page should have started.
 ECHO You should read the README.md inside your folder project
 GOTO :EOF
 
 :checkAvailableApp
-FOR %%G IN (xampp python) DO ( 
+FOR %%G IN %list% DO ( 
     IF /I "%~1"=="%%~G" (
         GOTO MATCH
     ) ELSE (
-        GOTO NOMATCH
+        GOTO LIST
     )
 )
 GOTO :EOF
 
 :MATCH
-CALL :StartAndPrint %1 %2
+CALL :StartAndPrint %app% %project_name%%
 GOTO :EOF
 
-:NOMATCH
-ECHO Cette application n'est pas disponible
+:LIST
+ECHO How to use Rino : 
+ECHO rino [app] [project_name]
+ECHO Available apps: 
+FOR %%G IN %list% DO ( 
+   ECHO %%G
+)
 GOTO :EOF
