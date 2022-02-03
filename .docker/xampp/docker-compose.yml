@@ -1,0 +1,11 @@
+version: "3.3"
+
+services:
+  xamp:
+    container_name: xamp
+    image: tomsik68/xampp:${PHP_VERSION}
+    ports:
+      - 22:22
+      - 80:80 
+    volumes:
+      - ./project:/www
