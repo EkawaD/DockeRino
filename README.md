@@ -4,8 +4,8 @@ Dockerino is a wrapper for the most used containers in web dev. It can help you 
 ## PREREQUESITE
 
 For this project to fully work as expected, you'll need :
-Docker Desktop with WSL enabled
-Git 
+- Docker Desktop with WSL enabled
+- Git 
 
 
 ## INSTALL
