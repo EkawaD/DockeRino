@@ -27,7 +27,7 @@ IF %app% == run (
     git pull
     ECHO Dockerino is up to date !
     CD %current%
-) ELSE IF %app%==list (
+) ELSE IF %app%==help (
     GOTO :LIST
 ) ELSE (
     CALL :checkAvailableApp %app%
