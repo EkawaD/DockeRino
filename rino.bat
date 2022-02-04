@@ -38,6 +38,7 @@ GOTO :EOF
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 ECHO Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
+ECHO PROJECT=%~2 >> .env
 docker-compose up -d
 START http://127.0.0.1:80/www
 ECHO Web server is UP ! A localhost page should have started.
