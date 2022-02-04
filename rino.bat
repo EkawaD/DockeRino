@@ -4,7 +4,7 @@ set app=%1
 set project_name=%2
 set list=(xampp symfony python django flask react vue)
 set current=%cd%
-set install_dir=%cd%
+set install_dir=%USERPROFILE%/.rino
 
 tasklist /fi "ImageName eq Docker Desktop.exe" /fo csv 2>NUL | find /I "Docker Desktop.exe">NUL
 if "%ERRORLEVEL%"=="0" (
@@ -23,7 +23,9 @@ IF %app% == run (
     docker-compose up -d  
     START http://127.0.0.1:80/www
 ) ELSE IF %app% == update (
-    CALL :checkAvailableApp %app%
+    CD %install_dir%
+    git fetch --all
+    CD %current%
 ) ELSE (
     CALL :checkAvailableApp %app%
 )
