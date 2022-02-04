@@ -8,4 +8,4 @@ services:
       - 22:22
       - 80:80 
     volumes:
-      - ./project:/www
+      - ./app:/www
