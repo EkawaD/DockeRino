@@ -25,6 +25,7 @@ IF %app% == run (
 ) ELSE IF %app%==update (
     CD %install_dir%
     git fetch --all
+    ECHO Dockerino is up to date !
     CD %current%
 ) ELSE (
     CALL :checkAvailableApp %app%
@@ -74,7 +75,6 @@ GOTO :EOF
 :checkAvailableApp
 FOR %%G IN %list% DO ( 
     IF /I "%~1"=="%%~G" (
-        CD %dockerino_path%
         GOTO MATCH %%~G
     ) 
 )
@@ -82,9 +82,9 @@ GOTO :LIST
 
 :MATCH
 IF %~1 == xampp (
-    CALL :xampp %app% %project_name%%
+    CALL :xampp %app% %project_name%
 ) ELSE IF %~1 == symfony (
-    CALL :symfony %app% %project_name%%
+    CALL :symfony %app% %project_name%
 ) ELSE (
     ECHO Erreur !
 )
