@@ -1,7 +1,7 @@
 # Dockerino
 Dockerino is a wrapper for the most used containers in web dev. It can help you deploy dev environment quickly and easily
 
-##Available applications : 
+## Available applications : 
 
   | Application                            | Containers                             |
   |----------------------------------------|----------------------------------------|
@@ -48,7 +48,7 @@ There's the command you need to know
   ```
   rino update
   ```
-- If the [app] is available (see [Available applications](##Available applications)). This will create a folder on your Desktop named [project_name],
+- If the [app] is available (see [Available applications](## Available applications)). This will create a folder on your Desktop named [project_name],
 launch Docker Desktop.exe if it's not launched yet and run the containers. You have nothing else to do ! :P
 For more informations, see the readme on each app inside the .docker folders of this repo (it's also on the root of your newly created app)
   ```
