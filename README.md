@@ -8,7 +8,7 @@ Dockerino is a wrapper for the most used containers in web dev. It can help you 
   | XAMPP                                  | Cross platform WAMP image              |
   | SYMFONY                                | PHP-fpm + NGINX + MYSQL + PHPMyAdmin   |
   
-Dockerino also comes with a tool named Rino **Note that it's only working on Windows for now !**
+Dockerino also comes with a tool named Rino **(Windows users only)**
 
 ## Prerequesite
 
@@ -27,8 +27,9 @@ You can now navigate inside the .docker folders and find lot of pre-configured D
 I hope it can help you with finding the right docker configuration you need for your project (I struggled a bit when I started with docker, you should not !)
 
 ## Use the Rino helper
+**Note that it's only working on Windows for now !**
 
-This project come with a batch tool named Rino. **Note that it's only working on Windows for now !**
+This project come with a batch tool named Rino. 
 Rino helps you create, run and update your containers easily
 
 After cloning this repo : 
@@ -36,10 +37,10 @@ After cloning this repo :
 cd DockeRino
 install
 ```
-This will install rino on your system (in %USERPROFILE%/.rino) and add it to your $PATH variable
+This will install rino on your system (in %USERPROFILE%/.rino) and add it to your $PATH variable.
 You can now use rino everywhere on your system.
 
-There's the command you need to know 
+There's the commands you need to know 
 - Show all the command available for rino
   ```
   rino help
