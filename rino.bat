@@ -22,7 +22,7 @@ IF %docker_running%==false (
 IF %app% == run (
     docker-compose up -d  
     START http://127.0.0.1:80/www
-) ELSE IF %app% == update (
+) ELSE IF %app%==update (
     CD %install_dir%
     git fetch --all
     CD %current%
@@ -97,6 +97,8 @@ ECHO Available apps:
 FOR %%G IN %list% DO ( 
    ECHO %%G
 )
+ECHO run
+ECHO update
 GOTO :EOF
 
 :MOVE_TO_DESKTOP
