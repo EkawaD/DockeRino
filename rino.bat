@@ -24,7 +24,7 @@ IF %app% == run (
     START http://127.0.0.1:80/www
 ) ELSE IF %app%==update (
     CD %install_dir%
-    git fetch --all
+    git pull
     ECHO Dockerino is up to date !
     CD %current%
 ) ELSE (
