@@ -103,7 +103,7 @@ GOTO :EOF
 
 :MOVE_TO_DESKTOP
 ECHO Creating %~2 project on your Desktop...
-ECHO "%install_dir%/.docker/%~1"
+ECHO %install_dir%/.docker/%~1
 XCOPY "%install_dir%/.docker/%~1" "%USERPROFILE%\Desktop\%~2\" /s/h/e/k/f/c /Q 
 CD %USERPROFILE%\Desktop\%~2
 GOTO :EOF
