@@ -2,16 +2,54 @@ version: "3.3"
 
 services:
   symfony:
-    build: .docker
-    container_name: symfony
+      build: .docker
+      container_name: ${PROJECT}_symfony
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./.docker/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+      ports:
+        - "9000:9000"
+
+  nginx:
+    image: nginx:alpine
+    container_name: ${PROJECT}-nginx
+    working_dir: /application
+    depends_on:
+      - symfony
+    volumes:
+        - .:/application
+        - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        - .:/mysql/data
+    ports:
+      - "80:80"
+
+  mysql:
+    container_name: ${PROJECT}_mysql
+    image: mysql:8.0
+    restart: always
     volumes:
       - .:/application
-      
-  xampp:
-    container_name: xamp
-    image: tomsik68/xampp:${PHP_VERSION}
+    environment:
+        MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${DATABASE_NAME}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - 22:22
-      - 80:80 
-    volumes:
-      - ./app:/www
+        - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${PROJECT}_phpmyadmin
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: ${MYSQL_USER}
+      PMA_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "81:80"

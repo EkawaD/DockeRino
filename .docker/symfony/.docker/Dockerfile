@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.1.2-fpm
 LABEL maintainer="Ekawa https://github.com/EkawaD"
 
 WORKDIR "/application"
@@ -28,6 +28,13 @@ RUN "date"
 # Type docker-php-ext-install to see available extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
+# Install symfony-cli
 RUN echo 'alias sf="php bin/console"' >> ~/.bashrc
+
+
+
+
+
+
 
 
