@@ -21,7 +21,11 @@ IF %docker_running%==false (
 
 IF %app% == run (
     docker-compose up -d  
-    START http://127.0.0.1:80/www
+    set container=docker ps --format {{.Names}}
+    for /f "tokens=2 delims=_" %%a in ("%docker%") do set name=%%a
+    IF %name%==xampp START http://127.0.0.1:80/www
+    IF %name%==symfony START http://127.0.0.1:80
+    IF %name%==python ( docker exec %container% %2 )
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
@@ -70,6 +74,17 @@ DEL docker-compose.yml
 CD %USERPROFILE%\Desktop\%~2
 type .env >> app/.env
 START http://127.0.0.1:80
+CD %current%
+GOTO :EOF
+
+:python
+CALL :MOVE_TO_DESKTOP %app% %project_name%
+ECHO Starting the docker-compose file...
+CD %USERPROFILE%\Desktop\%~2\
+ECHO PROJECT=%~2 >> .env
+docker-compose up -d
+ECHO Python is ready
+ECHO You should read the README.md file !
 CD %current%
 GOTO :EOF
 

@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  python:
+      build:
+        context: .docker
+        args:
+          PYTHON_VERSION: ${PYTHON_VERSION}
+      container_name: ${PROJECT}_python
+      working_dir: /application
+      command: tail -f /dev/null
+      volumes:
+        - ./app:/application
+
+ 
