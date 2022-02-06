@@ -8,14 +8,10 @@ set install_dir=%USERPROFILE%/.rino
 
 tasklist /fi "ImageName eq Docker Desktop.exe" /fo csv 2>NUL | find /I "Docker Desktop.exe">NUL
 if "%ERRORLEVEL%"=="0" (
-    set docker_running=true
+    ECHO Docker is running
 ) else (
-    set docker_running=false
-)
-
-IF %docker_running%==false (
     ECHO Starting docker deamon
-    start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+    START "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
     ECHO Docker Desktop started !
 )
 
@@ -23,9 +19,15 @@ IF %app% == run (
     docker-compose up -d  
     set container=docker ps --format {{.Names}}
     for /f "tokens=2 delims=_" %%a in ("%docker%") do set name=%%a
-    IF %name%==xampp START http://127.0.0.1:80/www
-    IF %name%==symfony START http://127.0.0.1:80
-    IF %name%==python ( docker exec %container% %2 )
+    IF %name%==xampp (
+        START http://127.0.0.1:80/www
+    ) ELSE IF %name%==symfony (
+        START http://127.0.0.1:80
+    ) ELSE IF %name%==python (
+         docker exec %container% %2
+    ) ELSE (
+        ECHO ERREUR !
+    )
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
@@ -103,6 +105,8 @@ IF %~1 == xampp (
     CALL :xampp %app% %project_name%
 ) ELSE IF %~1 == symfony (
     CALL :symfony %app% %project_name%
+) ELSE IF %~1 == symfony (
+    CALL :python %app% %project_name%
 ) ELSE (
     ECHO Erreur !
 )
