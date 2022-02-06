@@ -102,11 +102,11 @@ FOR %%G IN %list% DO (
 GOTO :LIST
 
 :MATCH
-IF %~1 == xampp (
+IF %~1==xampp (
     CALL :xampp %app% %project_name%
-) ELSE IF %~1 == symfony (
+) ELSE IF %~1==symfony (
     CALL :symfony %app% %project_name%
-) ELSE IF %~1 == symfony (
+) ELSE IF %~1==python (
     CALL :python %app% %project_name%
 ) ELSE (
     ECHO Erreur !
