@@ -17,7 +17,7 @@ if "%ERRORLEVEL%"=="0" (
 
 IF %app%==run (
     set container=docker ps --format {{.Names}}
-    for /f "tokens=2 delims=_" %%a in ("%docker%") do ( echo %%a )
+    for /f "tokens=2 delims=_" %%a in ("%container%") do ( echo %%a )
     @REM IF %name%==xampp (
     @REM     docker-compose up -d
     @REM     START http://127.0.0.1:80/www
