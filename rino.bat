@@ -15,7 +15,7 @@ if "%ERRORLEVEL%"=="0" (
 
 IF %docker_running%==false (
     ECHO Starting docker deamon
-    start "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+    start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
     ECHO Docker Desktop started !
 )
 
