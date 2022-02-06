@@ -16,19 +16,19 @@ if "%ERRORLEVEL%"=="0" (
 )
 
 IF %app%==run (
-    docker-compose up -d  
     set container=docker ps --format {{.Names}}
-    for /f "tokens=2 delims=_" %%a in ("%docker%") do set name=%%a
+    for /f "tokens=2 delims=_" %%a in ("%docker%") do ( echo %%a )
     @REM IF %name%==xampp (
+    @REM     docker-compose up -d
     @REM     START http://127.0.0.1:80/www
     @REM ) ELSE IF %name%==symfony (
+    @REM     docker-compose up -d
     @REM     START http://127.0.0.1:80
     @REM ) ELSE IF %name%==python (
     @REM      docker exec %container% %2
     @REM ) ELSE (
     @REM     ECHO ERREUR !
     @REM )
-    ECHO %name%
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
