@@ -85,17 +85,17 @@ GOTO :EOF
 
 :RUN_PROJECT
 FOR /F "tokens=2 delims==" %%a IN ("%project%") DO (
-    ECHO %%a
+    set name=%%a
 )
-@REM IF %project%==xampp ( 
-@REM     ECHO XAMPP
-@REM ) ELSE IF %project%==symfony (
-@REM     ECHO SYMFONY
-@REM ) ELSE IF %project%==python (
-@REM     ECHO PYTHON
-@REM ) ELSE (
-@REM     ECHO NON RECONNU
-@REM )
+IF %name%==XAMPP ( 
+    ECHO my name is xampp
+) ELSE IF %name%==SYMFONY (
+    ECHO my name is symfony
+) ELSE IF %name%==PYTHON (
+    ECHO my name is python
+) ELSE (
+    ECHO NON RECONNU
+)
 GOTO :EOF
 
 
