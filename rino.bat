@@ -99,14 +99,6 @@ FOR /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
         docker exec -ti %container% python %project_name% 
     )
 )
-@REM IF defined %start%  (
-@REM     IF %start==pyhon (
-@REM         ECHO %project%
-@REM         ECHO %project_name% 
-@REM         @REM docker exec -ti %project%_python %project_name% 
-@REM     )
-)
-
 GOTO :EOF
 
 :START_PROJECT
