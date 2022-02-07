@@ -96,7 +96,7 @@ for %%* in (.) do set project=%%~nx*
 FOR /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
     set container=%project%_%process%
     IF %container%==%%i (
-        docker exec -ti %container% hello.py
+        docker exec -ti %container% python hello.py
     )
 )
 ECHO %project%
