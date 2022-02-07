@@ -23,7 +23,6 @@ IF %app%==start (
 
 GOTO :EOF
 
-
 :xampp
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 ECHO Starting the docker-compose file...
@@ -36,6 +35,7 @@ ECHO Web server is UP ! A localhost page should have started.
 ECHO You should read the README.md inside your folder project
 CD %current%
 GOTO :EOF
+
 
 :symfony
 CALL :MOVE_TO_DESKTOP %app% %project_name%
