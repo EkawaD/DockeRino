@@ -6,15 +6,10 @@ set list=(xampp symfony python django flask react vue)
 set current=%cd%
 set install_dir=%USERPROFILE%/.rino
 
-IF %app%==run (
-    @REM CALL :START_DOCKER
-    @REM FOR /F "tokens=*" %%g IN ('docker ps --format {{.Names}}') DO ( 
-    @REM     SET container=%%g
-    @REM )
-    
-    setlocal
-    FOR /F "tokens=*" %%i in ('type .env') do SET project=%%i & GOTO :RUN_PROJECT %project%
-    endlocal
+IF %app%==start (
+    CALL :WHERE_AM_I "start"
+) ELSE IF %app%==run (
+    CALL :WHERE_AM_I "run"
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
@@ -33,7 +28,6 @@ GOTO :EOF
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 ECHO Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
-ECHO BOILERPLATE=XAMPP >> .env
 ECHO PROJECT=%~2 >> .env
 CALL :START_DOCKER
 docker-compose up -d
@@ -46,7 +40,6 @@ GOTO :EOF
 :symfony
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 CD %USERPROFILE%\Desktop\%~2
-ECHO #.ENV > .env
 ECHO BOILERPLATE=SYMFONY >> .env
 ECHO PROJECT=%~2 >> .env
 ECHO PROJECT_URL= >> .env
@@ -74,7 +67,6 @@ GOTO :EOF
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 ECHO Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
-ECHO BOILERPLATE=PYTHON >> .env
 ECHO PROJECT=%~2 >> .env
 CALL :START_DOCKER
 docker-compose up -d
@@ -83,16 +75,52 @@ ECHO You should read the README.md file !
 CD %current%
 GOTO :EOF
 
-:RUN_PROJECT
-FOR /F "tokens=2 delims==" %%a IN ("%project%") DO (
-    set name=%%a
+:WHER_AM_I
+FOR /F "tokens=*" %%i in ('type .env') do (
+    FOR /F "tokens=2 delims==" %%a IN ("%project%") DO ( 
+        SET name=%%a
+    )
+    IF %~1=="start" (
+        GOTO :START_PROJECT %name%
+    ) ELSE IF %~1=="run" (
+        GOTO :RUN %name%
+    )  
+    
 )
+GOTO :EOF
+
+
+:RUN 
+for %%* in (.) do echo %%~nx*
+ECHO %name%
+@REM IF defined %start%  (
+@REM     IF %start==pyhon (
+@REM         docker exec -ti _python 
+@REM     )
+@REM ) ELSE (
+
+@REM )
+
+GOTO :EOF
+
+:START_PROJECT
 IF %name%==XAMPP ( 
-    ECHO my name is xampp
+    CALL :START_DOCKER
+    docker-compose up -d
+    START http://127.0.0.1:80/www
+    ECHO Web server is UP ! A localhost page should have started.
+    set start=xampp
 ) ELSE IF %name%==SYMFONY (
-    ECHO my name is symfony
+    CALL :START_DOCKER
+    docker-compose up -d
+    START http://127.0.0.1:80
+    ECHO Web server is UP ! A localhost page should have started.
+    set start=symfony
 ) ELSE IF %name%==PYTHON (
-    ECHO my name is python
+    CALL :START_DOCKER
+    docker-compose up -d
+    ECHO Python is up, you can now run your sript with : rino run [script]
+    set start=python
 ) ELSE (
     ECHO NON RECONNU
 )
@@ -132,13 +160,15 @@ GOTO :EOF
 
 :LIST
 ECHO How to use Rino : 
-ECHO rino [app] [project_name]
+ECHO rino update : Met à jour rino
+ECHO rino help : Affiche cette aide
+ECHO rino start : Démarre les conteneur du répertoire courant
+ECHO rino run [script] : Lance un script
+ECHO rino [app] [project_name] : Crée un nouveau projet
 ECHO Available apps: 
 FOR %%G IN %list% DO ( 
    ECHO %%G
 )
-ECHO run
-ECHO update
 GOTO :EOF
 
 :MOVE_TO_DESKTOP
