@@ -53,15 +53,19 @@ goto :eof
 :get_app
 for %%G in %list% do ( 
     if /I "%~1"=="%%~G" (
-        if %~1==xampp (
-            call %lib% xampp %_app% %_project_name%
-        ) else if %~1==symfony (
-            call %lib% symfony %_app% %_project_name%
-        ) else if %~1==python (
-            call %lib% python %_app% %_project_name%
-        ) else (
-            echo Erreur !
-        )
+        goto :match %%~G
     ) 
+)
+goto :eof
+
+:match
+if %~1==xampp (
+    call %lib% xampp %_app% %_project_name%
+) else if %~1==symfony (
+    call %lib% symfony %_app% %_project_name%
+) else if %~1==python (
+    call %lib% python %_app% %_project_name%
+) else (
+    echo Erreur !
 )
 goto :eof
