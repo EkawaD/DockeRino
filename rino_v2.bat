@@ -1,4 +1,5 @@
 @echo Off
+set current=%cd%
 set _batch_dir=%USERPROFILE%/.rino/batch
 call %_batch_dir%/SetupEnv.bat
 
@@ -26,6 +27,10 @@ if %param1%==start (
     set _project_name=%param2%
     call :get_app %_app%
 )
+
+
+echo fin
+call %_batch_dir%/CleanEnv.bat
 
 goto :eof
 
