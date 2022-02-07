@@ -86,16 +86,16 @@ CD %current%
 GOTO :EOF
 
 :RUN_PROJECT
-ECHO %project%
-@REM IF %~1==xampp ( 
-@REM     ECHO XAMPP
-@REM ) ELSE IF %~1==symfony (
-@REM     ECHO SYMFONY
-@REM ) ELSE IF %~1==python (
-@REM     ECHO PYTHON
-@REM ) ELSE (
-@REM     ECHO NON RECONNU
-@REM )
+
+IF %project%==xampp ( 
+    ECHO XAMPP
+) ELSE IF %project%==symfony (
+    ECHO SYMFONY
+) ELSE IF %project%==python (
+    ECHO PYTHON
+) ELSE (
+    ECHO NON RECONNU
+)
 GOTO :EOF
 
 
