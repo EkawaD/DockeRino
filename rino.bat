@@ -93,6 +93,7 @@ GOTO :EOF
 
 :RUN 
 for %%* in (.) do set project=%%~nx*
+ECHO %start%
 ECHO %project%
 ECHO %project_name% 
 @REM IF defined %start%  (
