@@ -11,9 +11,7 @@ IF %app%==run (
     @REM FOR /F "tokens=*" %%g IN ('docker ps --format {{.Names}}') DO ( 
     @REM     SET container=%%g
     @REM )
-    @REM FOR /F "tokens=2 delims=_" %%a IN ("%container%") DO (
-    @REM     SET name=%%a 
-    @REM )
+    
     setlocal
     FOR /F "tokens=*" %%i in ('type .env') do SET project=%%i & GOTO :RUN_PROJECT %project%
     endlocal
@@ -86,16 +84,18 @@ CD %current%
 GOTO :EOF
 
 :RUN_PROJECT
-
-IF %project%==xampp ( 
-    ECHO XAMPP
-) ELSE IF %project%==symfony (
-    ECHO SYMFONY
-) ELSE IF %project%==python (
-    ECHO PYTHON
-) ELSE (
-    ECHO NON RECONNU
+FOR /F "tokens=2 delims==" %%a IN ("%project%") DO (
+    ECHO %%a
 )
+@REM IF %project%==xampp ( 
+@REM     ECHO XAMPP
+@REM ) ELSE IF %project%==symfony (
+@REM     ECHO SYMFONY
+@REM ) ELSE IF %project%==python (
+@REM     ECHO PYTHON
+@REM ) ELSE (
+@REM     ECHO NON RECONNU
+@REM )
 GOTO :EOF
 
 
