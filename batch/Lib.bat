@@ -24,8 +24,8 @@ goto :eof
 :xampp
 call :move_to_desktop %_app% %_project_name%
 echo Starting the docker-compose file...
-CD %USERPROFILE%\Desktop\%~2\
-echo PROJECT=%~2 >> .env
+CD %USERPROFILE%\Desktop\%_project_name%
+echo PROJECT=%_project_name% >> .env
 call :START_DOCKER
 docker-compose up -d
 START http://127.0.0.1:80/www
@@ -36,9 +36,9 @@ goto :eof
 
 :symfony
 call :move_to_desktop %_app% %_project_name%
-CD %USERPROFILE%\Desktop\%~2
+CD %USERPROFILE%\Desktop\%_project_name%
 echo BOILERPLATE=symfony >> .env
-echo PROJECT=%~2 >> .env
+echo PROJECT=%_project_name%>> .env
 echo PROJECT_URL= >> .env
 echo DATABASE_ROOT_PASSWORD=root >> .env
 echo DATABASE_NAME=test >> .env
@@ -50,11 +50,11 @@ call :START_DOCKER
 echo Starting the docker-compose file...
 docker-compose build
 docker-compose up -d 
-docker exec %~2_symfony composer create-project symfony/website-skeleton app -n
-CD %USERPROFILE%\Desktop\%~2\app
+docker exec %_project_name%_symfony composer create-project symfony/website-skeleton app -n
+CD %USERPROFILE%\Desktop\%_project_name%\app
 DEL docker-compose.override.yml
 DEL docker-compose.yml
-CD %USERPROFILE%\Desktop\%~2
+CD %USERPROFILE%\Desktop\%_project_name%
 type .env >> app/.env
 START http://127.0.0.1:80
 CD %current%
@@ -63,8 +63,8 @@ goto :eof
 :python
 call :move_to_desktop %_app% %_project_name%
 echo Starting the docker-compose file...
-CD %USERPROFILE%\Desktop\%~2\
-echo PROJECT=%~2 >> .env
+CD %USERPROFILE%\Desktop\%_project_name%\
+echo PROJECT=%_project_name% >> .env
 call :START_DOCKER
 docker-compose up -d
 echo Python is ready
