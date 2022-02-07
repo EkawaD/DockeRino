@@ -15,17 +15,8 @@ IF %app%==run (
     @REM     SET name=%%a 
     @REM )
     setlocal
-    FOR /F "tokens=*" %%i in ('type .env') do ECHO %%i & GOTO :EOF
+    FOR /F "tokens=*" %%i in ('type .env') do GOTO :RUN_PROJECT %%i
     endlocal
-    @REM IF %name%==xampp ( 
-    @REM     ECHO XAMPP
-    @REM ) ELSE IF %name%==symfony (
-    @REM     ECHO SYMFONY
-    @REM ) ELSE IF %name%==python (
-    @REM     ECHO PYTHON
-    @REM ) ELSE (
-    @REM     ECHO NON RECONNU
-    @REM )
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
@@ -92,6 +83,18 @@ docker-compose up -d
 ECHO Python is ready
 ECHO You should read the README.md file !
 CD %current%
+GOTO :EOF
+
+:RUN_PROJECT
+IF %~1==xampp ( 
+    ECHO XAMPP
+) ELSE IF %~1==symfony (
+    ECHO SYMFONY
+) ELSE IF %~1==python (
+    ECHO PYTHON
+) ELSE (
+    ECHO NON RECONNU
+)
 GOTO :EOF
 
 
