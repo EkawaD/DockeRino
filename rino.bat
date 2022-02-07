@@ -79,12 +79,12 @@ GOTO :EOF
 FOR /F "tokens=*" %%i in ('type .env') do (
     set line=%%i
     FOR /F "tokens=2 delims==" %%a IN ("%line%") DO ( 
-        SET name=%%a
+        SET process=%%a
     )
     IF %~1==start (
-        GOTO :START_PROJECT %name%
+        GOTO :START_PROJECT %process%
     ) ELSE IF %~1==run (
-        GOTO :RUN %name%
+        GOTO :RUN %process%
     )  
     
 )
@@ -93,7 +93,12 @@ GOTO :EOF
 
 :RUN 
 for %%* in (.) do set project=%%~nx*
-ECHO %start%
+FOR /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
+    set container=%project%_%process%
+    IF %project%_%process%==%%i (
+        ECHO %container%
+    )
+)
 ECHO %project%
 ECHO %project_name% 
 @REM IF defined %start%  (
