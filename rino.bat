@@ -20,16 +20,8 @@ IF %app%==run (
     echo %container%
     FOR /F "tokens=*" %%g IN ("docker ps --format {{.Names}}") do ( set container=%%g )
     for /f "tokens=2 delims=_" %%a in ("%container%") do ( set name=%%a )
-    IF %name%==xampp (
-         docker-compose up -d && START http://127.0.0.1:80/www
-    ) 
-    @REM ELSE IF %name%==symfony (
-    @REM     docker-compose up -d && START http://127.0.0.1:80
-    @REM ) ELSE IF %name%==python (
-    @REM      docker exec %container% %2
-    @REM ) ELSE (
-    @REM     ECHO ERREUR !
-    @REM )
+    echo %name%
+   
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
