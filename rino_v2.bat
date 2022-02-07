@@ -14,7 +14,7 @@ if %param1%==start (
     call :get_params
     call :is_container_started
     if %process%==python (
-        docker exec -ti %container% python %~2
+        docker exec -ti %container% python %param2%
     ) else (
         echo This project is not a python project !
     )
@@ -29,7 +29,6 @@ if %param1%==start (
 )
 
 
-echo fin
 call %_batch_dir%/CleanEnv.bat
 
 goto :eof
