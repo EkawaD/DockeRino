@@ -40,7 +40,7 @@ GOTO :EOF
 :symfony
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 CD %USERPROFILE%\Desktop\%~2
-ECHO BOILERPLATE=SYMFONY >> .env
+ECHO BOILERPLATE=symfony >> .env
 ECHO PROJECT=%~2 >> .env
 ECHO PROJECT_URL= >> .env
 ECHO DATABASE_ROOT_PASSWORD=root >> .env
@@ -113,19 +113,19 @@ ECHO %project_name%
 GOTO :EOF
 
 :START_PROJECT
-IF %name%==XAMPP ( 
+IF %name%==xampp ( 
     CALL :START_DOCKER
     docker-compose up -d
     START http://127.0.0.1:80/www
     ECHO Web server is UP ! A localhost page should have started.
     set start=xampp
-) ELSE IF %name%==SYMFONY (
+) ELSE IF %name%==symfony (
     CALL :START_DOCKER
     docker-compose up -d
     START http://127.0.0.1:80
     ECHO Web server is UP ! A localhost page should have started.
     set start=symfony
-) ELSE IF %name%==PYTHON (
+) ELSE IF %name%==python (
     CALL :START_DOCKER
     docker-compose up -d
     ECHO Python is up, you can now run your sript with : rino run [script]

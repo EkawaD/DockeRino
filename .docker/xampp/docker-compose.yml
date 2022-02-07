@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   xampp:
-    container_name: ${PROJECT}_xamp
+    container_name: ${PROJECT}_xampp
     image: tomsik68/xampp:${PHP_VERSION}
     ports:
       - 22:22
