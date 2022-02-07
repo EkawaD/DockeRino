@@ -82,9 +82,9 @@ FOR /F "tokens=*" %%i in ('type .env') do (
         SET process=%%a
     )
     IF %~1==start (
-        GOTO :START_PROJECT %process%
+        GOTO :START_PROJECT
     ) ELSE IF %~1==run (
-        GOTO :RUN %process%
+        GOTO :RUN 
     )  
     
 )
@@ -113,19 +113,19 @@ ECHO %project_name%
 GOTO :EOF
 
 :START_PROJECT
-IF %name%==xampp ( 
+IF %process%==xampp ( 
     CALL :START_DOCKER
     docker-compose up -d
     START http://127.0.0.1:80/www
     ECHO Web server is UP ! A localhost page should have started.
     set start=xampp
-) ELSE IF %name%==symfony (
+) ELSE IF %process%==symfony (
     CALL :START_DOCKER
     docker-compose up -d
     START http://127.0.0.1:80
     ECHO Web server is UP ! A localhost page should have started.
     set start=symfony
-) ELSE IF %name%==python (
+) ELSE IF %process%==python (
     CALL :START_DOCKER
     docker-compose up -d
     ECHO Python is up, you can now run your sript with : rino run [script]
