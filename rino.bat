@@ -15,7 +15,7 @@ IF %app%==run (
     @REM     SET name=%%a 
     @REM )
     setlocal
-    FOR /F "tokens=*" %%i in ('type .env') do GOTO :RUN_PROJECT %%i
+    FOR /F "tokens=*" %%i in ('type .env') do SET project=%%i & GOTO :RUN_PROJECT %project%
     endlocal
 ) ELSE IF %app%==update (
     CD %install_dir%
