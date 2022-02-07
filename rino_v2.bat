@@ -24,7 +24,7 @@ if %param1%==start (
 ) else (
     set _app=%param1%
     set _project_name=%param2%
-    call :get_app
+    call :get_app %_app%
 )
 
 goto :eof
@@ -52,7 +52,7 @@ goto :eof
 
 :get_app
 for %%G in %list% do ( 
-    if /I %_app%==%%~G (
+    if /I "%~1"=="%%~G" (
         goto :match %%~G
     ) 
 )
