@@ -1,5 +1,5 @@
 @Echo Off
-CALL /rino/SetupEnv.bat
+CALL SetupEnv.bat
 
 set param1=%1
 set param2=%2
