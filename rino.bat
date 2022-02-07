@@ -81,8 +81,10 @@ FOR /F "tokens=*" %%i in ('type .env') do (
         SET name=%%a
     )
     IF %~1=="start" (
+        ECHO LOL
         GOTO :START_PROJECT %name%
     ) ELSE IF %~1=="run" (
+        ECHO FUCK
         GOTO :RUN %name%
     )  
     
