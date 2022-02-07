@@ -77,14 +77,13 @@ GOTO :EOF
 
 :WHERE_AM_I
 FOR /F "tokens=*" %%i in ('type .env') do (
-    FOR /F "tokens=2 delims==" %%a IN ("%project%") DO ( 
+    set line=%%i
+    FOR /F "tokens=2 delims==" %%a IN ("%line%") DO ( 
         SET name=%%a
     )
     IF %~1==start (
-        ECHO LOL
         GOTO :START_PROJECT %name%
     ) ELSE IF %~1==run (
-        ECHO FUCK
         GOTO :RUN %name%
     )  
     
@@ -93,15 +92,15 @@ GOTO :EOF
 
 
 :RUN 
-for %%* in (.) do echo %%~nx*
-ECHO %name%
-@REM IF defined %start%  (
-@REM     IF %start==pyhon (
-@REM         docker exec -ti _python 
-@REM     )
-@REM ) ELSE (
+for %%* in (.) do set project=%%~nx*
 
-@REM )
+IF defined %start%  (
+    IF %start==pyhon (
+        ECHO %project%
+        ECHO %project_name% 
+        @REM docker exec -ti %project%_python %project_name% 
+    )
+)
 
 GOTO :EOF
 
