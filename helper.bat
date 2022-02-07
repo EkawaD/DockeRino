@@ -90,4 +90,5 @@ CD %~1
 git pull
 ECHO Dockerino is up to date !
 CD %current%
+GOTO :EOF
 

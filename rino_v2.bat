@@ -35,6 +35,7 @@ FOR /F "tokens=*" %%i in ('type .env') do (
     )
     GOTO :run
 )
+GOTO :EOF
     
 :IS_CONTAINER_STARTED
 FOR /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
@@ -58,3 +59,4 @@ FOR %%G IN %list% DO (
         )
     ) 
 )
+GOTO :EOF
