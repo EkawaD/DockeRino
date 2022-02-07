@@ -1,5 +1,8 @@
 @Echo Off
-CALL SetupEnv.bat
+set batch_dir=%USERPROFILE%/.rino/batch
+echo %batch_dir%
+call %batch_dir%/SetupEnv.bat
+echo %lib%
 
 set param1=%1
 set param2=%2
@@ -18,7 +21,7 @@ IF %param1%==start (
 ) ELSE IF %param1%==update (
     CALL :UPDATE
 ) ELSE IF %param1%==help (
-    CALL /rino/lib.bat HELP 
+    CALL %lib% HELP 
 ) ELSE (
     SET app=%param1%
     SET project_name=%param2%
