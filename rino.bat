@@ -6,22 +6,12 @@ set list=(xampp symfony python django flask react vue)
 set current=%cd%
 set install_dir=%USERPROFILE%/.rino
 
-tasklist /fi "ImageName eq Docker Desktop.exe" /fo csv 2>NUL | find /I "Docker Desktop.exe">NUL
-if "%ERRORLEVEL%"=="0" (
-    ECHO Docker is running
-) else (
-    ECHO Starting docker deamon
-    START "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
-    ECHO Docker Desktop started !
-)
-
 IF %app%==run (
-    
+    @REM CALL :START_DOCKER
     echo %container%
     FOR /F "tokens=*" %%g IN ("docker ps --format {{.Names}}") do ( set container=%%g )
     for /f "tokens=2 delims=_" %%a in ("%container%") do ( set name=%%a )
     echo %name%
-   
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
@@ -41,6 +31,7 @@ CALL :MOVE_TO_DESKTOP %app% %project_name%
 ECHO Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
 ECHO PROJECT=%~2 >> .env
+CALL :START_DOCKER
 docker-compose up -d
 START http://127.0.0.1:80/www
 ECHO Web server is UP ! A localhost page should have started.
@@ -60,6 +51,7 @@ ECHO MYSQL_USER=test >> .env
 ECHO MYSQL_PASSWORD=test >> .env
 ECHO DATABASE_URL="mysql://root:${DATABASE_ROOT_PASSWORD}@mysql:3306/${DATABASE_NAME}"  >> .env
 ECHO Finished !
+CALL :START_DOCKER
 ECHO Starting the docker-compose file...
 docker-compose build
 docker-compose up -d 
@@ -78,10 +70,23 @@ CALL :MOVE_TO_DESKTOP %app% %project_name%
 ECHO Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
 ECHO PROJECT=%~2 >> .env
+CALL :START_DOCKER
 docker-compose up -d
 ECHO Python is ready
 ECHO You should read the README.md file !
 CD %current%
+GOTO :EOF
+
+
+:START_DOCKER
+tasklist /fi "ImageName eq Docker Desktop.exe" /fo csv 2>NUL | find /I "Docker Desktop.exe">NUL
+if "%ERRORLEVEL%"=="0" (
+    ECHO Docker is running
+) else (
+    ECHO Starting docker deamon
+    START "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+    ECHO Docker Desktop started !
+)
 GOTO :EOF
 
 
