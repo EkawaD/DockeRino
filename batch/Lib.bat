@@ -12,7 +12,7 @@ goto :eof
 :start_docker
 tasklist /fi "ImageName eq Docker Desktop.exe" /fo csv 2>NUL | find /I "Docker Desktop.exe">NUL
 if "%ERRORLEVEL%"=="0" (
-    echo Docker is running
+    echo Docker Desktop is running
 ) else (
     echo Starting docker deamon
     start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
@@ -26,7 +26,7 @@ call :move_to_desktop %_app% %_project_name%
 echo Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%_project_name%
 echo PROJECT=%_project_name% >> .env
-call :START_DOCKER
+call :start_docker
 docker-compose up -d
 START http://127.0.0.1:80/www
 echo Web server is UP ! A localhost page should have started.
@@ -46,7 +46,7 @@ echo MYSQL_USER=test >> .env
 echo MYSQL_PASSWORD=test >> .env
 echo DATABASE_URL="mysql://root:${DATABASE_ROOT_PASSWORD}@mysql:3306/${DATABASE_NAME}"  >> .env
 echo Finished !
-call :START_DOCKER
+call :start_docker
 echo Starting the docker-compose file...
 docker-compose build
 docker-compose up -d 
@@ -63,9 +63,9 @@ goto :eof
 :python
 call :move_to_desktop %_app% %_project_name%
 echo Starting the docker-compose file...
-CD %USERPROFILE%\Desktop\%_project_name%\
+CD %USERPROFILE%\Desktop\%_project_name%
 echo PROJECT=%_project_name% >> .env
-call :START_DOCKER
+call :start_docker
 docker-compose up -d
 echo Python is ready
 echo You should read the README.md file !
