@@ -38,7 +38,7 @@ for /f "tokens=*" %%i in ('type .env') do (
         set _process=%%a
         set _container=%_project%_%_process%
     )
-    goto :run
+    goto :eof
 )
 goto :eof
     
