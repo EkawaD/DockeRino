@@ -3,7 +3,7 @@ call:%~1
 goto :eof
 
 
-:MOVE_TO_DESKTOP
+:move_to_desktop
 echo Creating %~2 project on your Desktop...
 XCOPY "%install_dir%/.docker/%~1" "%USERPROFILE%\Desktop\%~2\" /s/h/e/k/f/c /Q 
 CD %USERPROFILE%\Desktop\%~2
@@ -22,11 +22,11 @@ goto :eof
 
 
 :xampp
-CALL :MOVE_TO_DESKTOP %~1 %~2
+call :move_to_desktop %_app% %_project_name%
 echo Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
 echo PROJECT=%~2 >> .env
-CALL :START_DOCKER
+call :START_DOCKER
 docker-compose up -d
 START http://127.0.0.1:80/www
 echo Web server is UP ! A localhost page should have started.
@@ -35,7 +35,7 @@ CD %current%
 goto :eof
 
 :symfony
-CALL :MOVE_TO_DESKTOP %~1 %~2
+call :move_to_desktop %_app% %_project_name%
 CD %USERPROFILE%\Desktop\%~2
 echo BOILERPLATE=symfony >> .env
 echo PROJECT=%~2 >> .env
@@ -46,7 +46,7 @@ echo MYSQL_USER=test >> .env
 echo MYSQL_PASSWORD=test >> .env
 echo DATABASE_URL="mysql://root:${DATABASE_ROOT_PASSWORD}@mysql:3306/${DATABASE_NAME}"  >> .env
 echo Finished !
-CALL :START_DOCKER
+call :START_DOCKER
 echo Starting the docker-compose file...
 docker-compose build
 docker-compose up -d 
@@ -61,11 +61,11 @@ CD %current%
 goto :eof
 
 :python
-CALL :MOVE_TO_DESKTOP %~1 %~2
+call :move_to_desktop %_app% %_project_name%
 echo Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
 echo PROJECT=%~2 >> .env
-CALL :START_DOCKER
+call :START_DOCKER
 docker-compose up -d
 echo Python is ready
 echo You should read the README.md file !

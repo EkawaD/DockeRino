@@ -24,7 +24,7 @@ if %param1%==start (
 ) else (
     set _app=%param1%
     set _project_name=%param2%
-    call :get_app %_app% %_project_name%
+    call :get_app
 )
 
 goto :eof
