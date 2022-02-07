@@ -86,15 +86,16 @@ CD %current%
 GOTO :EOF
 
 :RUN_PROJECT
-IF %~1==xampp ( 
-    ECHO XAMPP
-) ELSE IF %~1==symfony (
-    ECHO SYMFONY
-) ELSE IF %~1==python (
-    ECHO PYTHON
-) ELSE (
-    ECHO NON RECONNU
-)
+ECHO %~1
+@REM IF %~1==xampp ( 
+@REM     ECHO XAMPP
+@REM ) ELSE IF %~1==symfony (
+@REM     ECHO SYMFONY
+@REM ) ELSE IF %~1==python (
+@REM     ECHO PYTHON
+@REM ) ELSE (
+@REM     ECHO NON RECONNU
+@REM )
 GOTO :EOF
 
 
@@ -108,8 +109,6 @@ if "%ERRORLEVEL%"=="0" (
     ECHO Docker Desktop started !
 )
 GOTO :EOF
-
-
 
 :checkAvailableApp
 FOR %%G IN %list% DO ( 
