@@ -1,5 +1,5 @@
 @Echo Off
-CALL helper.bat
+CALL /rino/SetupEnv.bat
 
 set param1=%1
 set param2=%2
@@ -18,7 +18,7 @@ IF %param1%==start (
 ) ELSE IF %param1%==update (
     CALL :UPDATE
 ) ELSE IF %param1%==help (
-    CALL :HELP 
+    CALL lib.bat HELP 
 ) ELSE (
     SET app=%param1%
     SET project_name=%param2%

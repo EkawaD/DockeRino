@@ -1,11 +1,6 @@
-SET current=%cd%
-SET install_dir=%USERPROFILE%/.rino
-SET list=(xampp symfony python django flask react vue)
-
-GOTO :EOF
-
-
-
+@echo off
+call:%~1
+goto :eof
 
 
 :MOVE_TO_DESKTOP
