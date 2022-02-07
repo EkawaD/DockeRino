@@ -15,7 +15,7 @@ IF %app%==run (
     @REM     SET name=%%a 
     @REM )
     setlocal
-    FOR /F "tokens=*" %%i in ('type .env') do ECHO %%a
+    FOR /F "tokens=*" %%i in ('type .env') do ECHO %%i & GOTO :EOF
     endlocal
     @REM IF %name%==xampp ( 
     @REM     ECHO XAMPP
