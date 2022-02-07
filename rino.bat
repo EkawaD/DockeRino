@@ -93,13 +93,14 @@ GOTO :EOF
 
 :RUN 
 for %%* in (.) do set project=%%~nx*
-
-IF defined %start%  (
-    IF %start==pyhon (
-        ECHO %project%
-        ECHO %project_name% 
-        @REM docker exec -ti %project%_python %project_name% 
-    )
+ECHO %project%
+ECHO %project_name% 
+@REM IF defined %start%  (
+@REM     IF %start==pyhon (
+@REM         ECHO %project%
+@REM         ECHO %project_name% 
+@REM         @REM docker exec -ti %project%_python %project_name% 
+@REM     )
 )
 
 GOTO :EOF
