@@ -1,10 +1,12 @@
 @Echo Off
 CALL helper.bat
 
-IF %~1==start (
+set param1=%1
+set param2=%2
+IF %param1%==start (
     CALL :START_DOCKER
     docker-compose run -d
-) ELSE IF %~1==run (
+) ELSE IF %param1%==run (
     CALL :GET_PARAMS
     CALL :IS_CONTAINER_STARTED
     IF %process%==python (
@@ -12,13 +14,13 @@ IF %~1==start (
     ) ELSE (
         ECHO This project is not a python project !
     )
-) ELSE IF %~1==update (
+) ELSE IF %param1%==update (
     CALL :UPDATE
-) ELSE IF %~1==help (
+) ELSE IF %param1%==help (
     CALL :HELP 
 ) ELSE (
-    SET app=%~1
-    SET project_name=%~2
+    SET app=%param1%
+    SET project_name=%param2%
     CALL :GET_APP %app% %project_name%
 )
 
