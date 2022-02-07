@@ -1,68 +1,67 @@
-@Echo Off
-set batch_dir=%USERPROFILE%/.rino/batch
-echo %batch_dir%
-call %batch_dir%/SetupEnv.bat
-echo %lib%
+@echo Off
+set _batch_dir=%USERPROFILE%/.rino/batch
+call %_batch_dir%/SetupEnv.bat
+
 
 set param1=%1
 set param2=%2
 
-IF %param1%==start (
-    CALL :START_DOCKER
+if %param1%==start (
+    call %lib% start_docker
     docker-compose run -d
-) ELSE IF %param1%==run (
-    CALL :GET_PARAMS
-    CALL :IS_CONTAINER_STARTED
-    IF %process%==python (
+) else if %param1%==run (
+    call :get_params
+    call :is_container_started
+    if %process%==python (
         docker exec -ti %container% python %~2
-    ) ELSE (
-        ECHO This project is not a python project !
+    ) else (
+        echo This project is not a python project !
     )
-) ELSE IF %param1%==update (
-    CALL :UPDATE
-) ELSE IF %param1%==help (
-    CALL %lib% HELP 
-) ELSE (
-    SET app=%param1%
-    SET project_name=%param2%
-    CALL :GET_APP %app% %project_name%
+) else if  %param1%==update (
+    call %lib% update
+) else if  %param1%==help (
+    call %lib% help 
+) else (
+    set _app=%param1%
+    set _project_name=%param2%
+    call :get_app %_app% %_project_name%
 )
 
-GOTO :EOF
+goto :eof
 
 
-:GET_PARAMS
-for %%* in (.) do set project=%%~nx*
-FOR /F "tokens=*" %%i in ('type .env') do (
-    set line=%%i
-    FOR /F "tokens=2 delims==" %%a IN ("%line%") DO ( 
-        SET process=%%a
-        SET container=%project%_%process%
+:get_params
+for %%* in (.) do set _project=%%~nx*
+for /f "tokens=*" %%i in ('type .env') do (
+    set _line=%%i
+    for /F "tokens=2 delims==" %%a in ("%_line%") do ( 
+        set _process=%%a
+        set _container=%_project%_%_process%
     )
-    GOTO :run
+    goto :run
 )
-GOTO :EOF
+goto :eof
     
-:IS_CONTAINER_STARTED
-FOR /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
-    IF NOT %%i==%container% (
-        ECHO No container for this project is currently running, you should use [rino start] first
+:is_container_started
+for /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
+    if not %%i==%_container% (
+        echo No container for this project is currently running, you should use [rino start] first
     ) 
 )
-GOTO :EOF
+goto :eof
 
-:GET_APP
-FOR %%G IN %list% DO ( 
-    IF /I "%~1"=="%%~G" (
-        IF %~1==xampp (
-            CALL :xampp %app% %project_name%
-        ) ELSE IF %~1==symfony (
-            CALL :symfony %app% %project_name%
-        ) ELSE IF %~1==python (
-            CALL :python %app% %project_name%
-        ) ELSE (
-            ECHO Erreur !
+:get_app
+for %%G in %list% do ( 
+    if /I "%~1"=="%%~G" (
+        if %~1==xampp (
+            call %lib% xampp %_app% %_project_name%
+        ) else if %~1==symfony (
+            call %lib% symfony %_app% %_project_name%
+        ) else if %~1==python (
+            call %lib% python %_app% %_project_name%
+        ) else (
+            echo Erreur !
         )
     ) 
 )
-GOTO :EOF
+goto :eof

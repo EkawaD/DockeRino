@@ -73,20 +73,20 @@ CD %current%
 GOTO :EOF
 
 
-:HELP
+:help
 ECHO How to use Rino : 
-ECHO rino update : Met à jour rino
-ECHO rino help : Affiche cette aide
-ECHO rino start : Démarre les conteneur du répertoire courant
-ECHO rino run [script] : Lance un script
-ECHO rino [app] [project_name] : Crée un nouveau projet
+ECHO rino update : update rino to latestt version
+ECHO rino help : Show this help
+ECHO rino start : start containers from current directory
+ECHO rino run [script] : run [script]
+ECHO rino [app] [project_name] : Create a new project
 ECHO Available apps: 
 FOR %%G IN %list% DO ( 
    ECHO %%G
 )
 GOTO :EOF
 
-:UPDATE
+:update
 CD %~1
 git pull
 ECHO Dockerino is up to date !
