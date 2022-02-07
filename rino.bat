@@ -75,7 +75,7 @@ ECHO You should read the README.md file !
 CD %current%
 GOTO :EOF
 
-:WHER_AM_I
+:WHERE_AM_I
 FOR /F "tokens=*" %%i in ('type .env') do (
     FOR /F "tokens=2 delims==" %%a IN ("%project%") DO ( 
         SET name=%%a
