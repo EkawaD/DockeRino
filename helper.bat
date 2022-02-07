@@ -2,6 +2,12 @@ SET current=%cd%
 SET install_dir=%USERPROFILE%/.rino
 SET list=(xampp symfony python django flask react vue)
 
+GOTO :EOF
+
+
+
+
+
 :MOVE_TO_DESKTOP
 ECHO Creating %~2 project on your Desktop...
 XCOPY "%install_dir%/.docker/%~1" "%USERPROFILE%\Desktop\%~2\" /s/h/e/k/f/c /Q 
