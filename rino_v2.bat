@@ -52,7 +52,7 @@ goto :eof
 
 :get_app
 for %%G in %list% do ( 
-    if /I "%_app%"=="%%~G" (
+    if /I %_app%==%%~G (
         goto :match %%~G
     ) 
 )
