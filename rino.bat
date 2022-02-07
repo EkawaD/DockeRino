@@ -7,9 +7,9 @@ set current=%cd%
 set install_dir=%USERPROFILE%/.rino
 
 IF %app%==start (
-    CALL :WHERE_AM_I "start"
+    GOTO :WHERE_AM_I "start"
 ) ELSE IF %app%==run (
-    CALL :WHERE_AM_I "run"
+    GOTO :WHERE_AM_I "run"
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
