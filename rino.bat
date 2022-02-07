@@ -8,10 +8,24 @@ set install_dir=%USERPROFILE%/.rino
 
 IF %app%==run (
     @REM CALL :START_DOCKER
-    echo %container%
-    FOR /F "tokens=*" %%g IN ("docker ps --format {{.Names}}") do ( set container=%%g )
-    for /f "tokens=2 delims=_" %%a in ("%container%") do ( set name=%%a )
-    echo %name%
+    @REM FOR /F "tokens=*" %%g IN ('docker ps --format {{.Names}}') DO ( 
+    @REM     SET container=%%g
+    @REM )
+    @REM FOR /F "tokens=2 delims=_" %%a IN ("%container%") DO (
+    @REM     SET name=%%a 
+    @REM )
+    setlocal
+    FOR /F "tokens=*" %%i in ('type .env') do ECHO %%i
+    endlocal
+    @REM IF %name%==xampp ( 
+    @REM     ECHO XAMPP
+    @REM ) ELSE IF %name%==symfony (
+    @REM     ECHO SYMFONY
+    @REM ) ELSE IF %name%==python (
+    @REM     ECHO PYTHON
+    @REM ) ELSE (
+    @REM     ECHO NON RECONNU
+    @REM )
 ) ELSE IF %app%==update (
     CD %install_dir%
     git pull
@@ -30,6 +44,7 @@ GOTO :EOF
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 ECHO Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
+ECHO BOILERPLATE=XAMPP >> .env
 ECHO PROJECT=%~2 >> .env
 CALL :START_DOCKER
 docker-compose up -d
@@ -43,6 +58,7 @@ GOTO :EOF
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 CD %USERPROFILE%\Desktop\%~2
 ECHO #.ENV > .env
+ECHO BOILERPLATE=SYMFONY >> .env
 ECHO PROJECT=%~2 >> .env
 ECHO PROJECT_URL= >> .env
 ECHO DATABASE_ROOT_PASSWORD=root >> .env
@@ -69,6 +85,7 @@ GOTO :EOF
 CALL :MOVE_TO_DESKTOP %app% %project_name%
 ECHO Starting the docker-compose file...
 CD %USERPROFILE%\Desktop\%~2\
+ECHO BOILERPLATE=PYTHON >> .env
 ECHO PROJECT=%~2 >> .env
 CALL :START_DOCKER
 docker-compose up -d
