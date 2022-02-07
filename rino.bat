@@ -15,7 +15,7 @@ IF %app%==run (
     @REM     SET name=%%a 
     @REM )
     setlocal
-    FOR /F "tokens=*" %%i in ('type .env') do SET project=%%i & GOTO RUN_PROJECT %project%
+    FOR /F "tokens=*" %%i in ('type .env') do SET project=%%i & GOTO :RUN_PROJECT %project%
     endlocal
 ) ELSE IF %app%==update (
     CD %install_dir%
@@ -86,7 +86,7 @@ CD %current%
 GOTO :EOF
 
 :RUN_PROJECT
-ECHO %~1
+ECHO %project%
 @REM IF %~1==xampp ( 
 @REM     ECHO XAMPP
 @REM ) ELSE IF %~1==symfony (
