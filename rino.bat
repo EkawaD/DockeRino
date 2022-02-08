@@ -26,8 +26,8 @@ if !param1!==start (
 ) else if  !param1!==help (
     call %lib% help 
 ) else (
-    set app=!param1!
-    set project_name=!param2!
+    set app=%param1%
+    set project_name=%param2%
     call :get_app !app!
 )
 
