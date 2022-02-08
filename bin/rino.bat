@@ -18,18 +18,20 @@ set current=%cd%
 set param1=%1
 set param2=%2
 
+echo.
+
 if !param1!==start (
     call :start
 ) else if !param1!==run (
     call :start 
     if !process!==python (
-        ECHO.
+        echo.
         echo [93m=== PYTHON RESPONSE ====================================================== [0m
-        ECHO.
+        echo.
         docker exec -ti !container! python !param2!
-        ECHO.
+        echo.
         echo [93m========================================================================== [0m
-        ECHO.
+        echo.
     ) else (
         echo ERROR: This project is not a python project !
     )
