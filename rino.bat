@@ -72,11 +72,11 @@ goto :eof
 
 :match
 if %~1==xampp (
-    call %lib% xampp !_app! !_project_name!
+    call %lib% xampp !app! !project_name!
 ) else if %~1==symfony (
-    call %lib% symfony !_app! !_project_name!
+    call %lib% symfony !app! !project_name!
 ) else if %~1==python (
-    call %lib% python !_app! !_project_name!
+    call %lib% python !app! !project_name!
 ) else (
     echo Erreur !
 )
