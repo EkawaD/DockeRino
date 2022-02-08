@@ -12,7 +12,7 @@ goto :eof
 :start_docker
 tasklist /fi "ImageName eq Docker Desktop.exe" /fo csv 2>NUL | find /I "Docker Desktop.exe">NUL
 if "%ERRORLEVEL%"=="0" (
-    echo Docker Desktop is running
+    echo ^<ESC^>[92m [92m [OK] Docker Desktop is running [0m
 ) else (
     echo Starting docker Desktop...
     start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
