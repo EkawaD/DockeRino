@@ -1,13 +1,3 @@
-echo ^<ESC^>[90m [90mWhite[0m
-echo ^<ESC^>[91m [91mRed[0m
-echo ^<ESC^>[92m [92mGreen[0m
-echo ^<ESC^>[93m [93mYellow[0m
-echo ^<ESC^>[94m [94mBlue[0m
-echo ^<ESC^>[95m [95mMagenta[0m
-echo ^<ESC^>[96m [96mCyan[0m
-echo ^<ESC^>[97m [97mWhite[0m
-
-
 @echo Off
 setlocal EnableDelayedExpansion
 
@@ -25,11 +15,11 @@ if !param1!==start (
     call :start 
     if !process!==python (
         ECHO.
-        echo ^<ESC^>[93m [93m === PYTHON RESPONSE ====================================================== [0m
+        echo  [93m === PYTHON RESPONSE ====================================================== [0m
         ECHO.
         docker exec -ti !container! python !param2!
         ECHO.
-        echo ^<ESC^>[93m [93m ========================================================================== [0m
+        echo  [93m ========================================================================== [0m
         ECHO.
     ) else (
         echo ERROR: This project is not a python project !
@@ -70,8 +60,7 @@ goto :eof
 call :get_params
 for /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
     if %%i==!container! (
-        echo 
-        echo ^<ESC^>[92m [92m [OK] Rino found %%i container [0m
+        echo [92m [OK] Rino found %%i container [0m
         goto :eof
     ) 
 )
