@@ -15,6 +15,3 @@ ECHO Rino has been added to your $PATH variable
 CD %current%
 
 
-set current=
-set install_dir=
-
