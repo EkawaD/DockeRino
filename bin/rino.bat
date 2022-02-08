@@ -41,7 +41,7 @@ goto :eof
 :start
 call %lib% start_docker
 call :is_container_started
-docker-compose up -d
+if not %started%==yes docker-compose up -d
 goto :eof
 
 :get_params
@@ -61,6 +61,7 @@ call :get_params
 for /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
     if %%i==!container! (
         echo [92m [OK] Rino found %%i container [0m
+        set started=yes
         goto :eof
     ) 
 )
