@@ -12,13 +12,13 @@ set param2=%2
 if !param1!==start (
     call :start
 ) else if !param1!==run (
-    call :start
+    call :start > nul
     call :get_params
     call :is_container_started
     if !process!==python (
         docker exec -ti !container! python !param2!
     ) else (
-        echo This project is not a python project !
+        echo ERROR: This project is not a python project !
     )
 ) else if  !param1!==update (
     call %lib% update
