@@ -13,8 +13,6 @@ if !param1!==start (
     call :start
 ) else if !param1!==run (
     call :start 
-    call :get_params 
-    call :is_container_started
     if !process!==python (
         docker exec -ti !container! python !param2!
     ) else (
@@ -53,6 +51,7 @@ for /f "tokens=*" %%i in ('type .env') do (
 goto :eof
     
 :is_container_started
+call :get_params
 for /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
     if %%i==!container! (
         echo Rino found %%i container
