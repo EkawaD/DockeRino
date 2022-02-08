@@ -10,9 +10,9 @@ set param1=%1
 set param2=%2
 
 if !param1!==start (
-    call %lib% start_docker
-    docker-compose up -d
+    call :start
 ) else if !param1!==run (
+    call :start
     call :get_params
     call :is_container_started
     if !process!==python (
@@ -33,6 +33,11 @@ if !param1!==start (
 goto :eof
 
 
+:start
+call %lib% start_docker
+docker-compose up -d
+goto :eof
+
 :get_params
 for %%* in (.) do set project=%%~nx*
 for /f "tokens=*" %%i in ('type .env') do (
@@ -47,9 +52,12 @@ goto :eof
     
 :is_container_started
 for /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
-    if not %%i==!container! (
-        echo No container for this project is currently running, you should use [rino start] first
-    ) 
+    if %%i==!container! (
+        echo Rino found %%i container
+    ) else (
+        echo No container for this project is currently running, you should use [rino start] to be sure
+        goto :eof
+    )
 )
 goto :eof
 
