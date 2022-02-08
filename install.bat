@@ -11,7 +11,7 @@ IF EXIST %install_dir% (
 )
 MKDIR %install_dir%
 CD %install_dir% && git clone https://github.com/EkawaD/DockeRino.git .
-IF EXIST %install_dir% SETX PATH "%PATH%:%path_rino%"
+IF EXIST %install_dir% SETX PATH "%PATH%;%path_rino%"
 ECHO Rino has been added to your $PATH variable
 CD %current%
 
