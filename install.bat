@@ -2,7 +2,7 @@
 
 set current=%cd%
 set install_dir=%USERPROFILE%\.rino\
-set path_rino=%USERPROFILE%\.rino\bin
+set path_rino=%USERPROFILE%\.rino\bin\
 
 
 IF EXIST %install_dir% (
