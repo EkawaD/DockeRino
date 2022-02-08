@@ -72,7 +72,7 @@ goto :eof
 
 :match
 echo %app%
-echo %projec_name%
+echo %project_name%
 if %~1==xampp (
     call %lib% xampp %app% %project_name%
 ) else if %~1==symfony (
