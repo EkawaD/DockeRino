@@ -15,7 +15,9 @@ if !param1!==start (
     call :start 
     if !process!==python (
         ECHO === PYTHON RESPONSE ======================================================
+        ECHO.
         docker exec -ti !container! python !param2!
+        ECHO.
         ECHO ==========================================================================
     ) else (
         echo ERROR: This project is not a python project !
