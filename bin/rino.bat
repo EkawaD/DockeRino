@@ -36,6 +36,7 @@ goto :eof
 
 :start
 call %lib% start_docker
+call :is_container_started
 docker-compose up -d
 goto :eof
 
