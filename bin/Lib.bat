@@ -5,7 +5,6 @@ goto :eof
 
 :move_to_desktop
 echo [95mRino[0m is creating [95m%~2[0m project on your Desktop ...
-echo.
 XCOPY "%install_dir%/.docker/%~1" "%USERPROFILE%\Desktop\%~2\" /s/h/e/k/f/c /Q 
 CD %USERPROFILE%\Desktop\%~2
 goto :eof
@@ -67,13 +66,13 @@ CD %current%
 goto :eof
 
 :python
-call :move_to_desktop %app% %project_name%
+call :move_to_desktop %app% !project_name!
 echo [96m[INFO] Starting the docker-compose file ...[0m
-CD %USERPROFILE%\Desktop\%project_name%
+CD %USERPROFILE%\Desktop\!project_name!
 echo PROJECT=%project_name% >> .env
 call :start_docker
 docker-compose up -d
-echo  [92m[SUCCESS] Python is ready ! [0m
+echo [92m[SUCCEfetinetly SS] Python is ready ! [0m
 echo You should read the [96mREADME.md[0m file !
 CD %current%
 goto :eof
