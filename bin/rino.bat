@@ -50,7 +50,7 @@ goto :eof
 :start
 call %lib% start_docker
 call :is_container_started
-if not %started%==yes (
+if %started%==no (
     docker-compose up -d
 )
 goto :eof
@@ -76,7 +76,8 @@ for /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
         goto :eof
     ) 
 )
-echo [91m [ERROR] No container for this project is currently running, you should use [rino start] to be sure [0m 
+set started=no
+echo [93m [WARNING] No container for this project is currently running, you should use [rino start] to be sure [0m 
 goto :eof
 
 :get_app
