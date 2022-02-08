@@ -16,7 +16,7 @@ if "%ERRORLEVEL%"=="0" (
 ) else (
     echo Starting docker deamon
     start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
-    timeout 30 > nul
+    timeout 25 > nul
     echo Docker Desktop started !
     
 )

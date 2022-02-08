@@ -11,7 +11,7 @@ set param2=%2
 
 if !param1!==start (
     call %lib% start_docker
-    docker-compose run -d
+    docker-compose up -d
 ) else if !param1!==run (
     call :get_params
     call :is_container_started
