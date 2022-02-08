@@ -55,11 +55,10 @@ call :get_params
 for /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
     if %%i==!container! (
         echo Rino found %%i container
-    ) else (
-        echo No container for this project is currently running, you should use [rino start] to be sure
         goto :eof
-    )
+    ) 
 )
+echo No container for this project is currently running, you should use [rino start] to be sure
 goto :eof
 
 :get_app
