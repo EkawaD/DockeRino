@@ -1,9 +1,0 @@
-set current=
-set install_dir=
-set list=
-set lib=
-set _project=
-set _process=
-set _container=
-set _batch_dir=
-goto :eof
