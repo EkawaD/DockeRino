@@ -12,8 +12,8 @@ set param2=%2
 if !param1!==start (
     call :start
 ) else if !param1!==run (
-    call :start > nul
-    call :get_params
+    call :start 
+    call :get_params 
     call :is_container_started
     if !process!==python (
         docker exec -ti !container! python !param2!
