@@ -1,11 +1,11 @@
-echo ^<ESC^>[90m [90mWhite[0m
-echo ^<ESC^>[91m [91mRed[0m
-echo ^<ESC^>[92m [92mGreen[0m
-echo ^<ESC^>[93m [93mYellow[0m
-echo ^<ESC^>[94m [94mBlue[0m
-echo ^<ESC^>[95m [95mMagenta[0m
-echo ^<ESC^>[96m [96mCyan[0m
-echo ^<ESC^>[97m [97mWhite[0m
+@REM echo ^<ESC^>[90m [90mWhite[0m
+@REM echo ^<ESC^>[91m [91mRed[0m
+@REM echo ^<ESC^>[92m [92mGreen[0m
+@REM echo ^<ESC^>[93m [93mYellow[0m
+@REM echo ^<ESC^>[94m [94mBlue[0m
+@REM echo ^<ESC^>[95m [95mMagenta[0m
+@REM echo ^<ESC^>[96m [96mCyan[0m
+@REM echo ^<ESC^>[97m [97mWhite[0m
 
 @echo Off
 setlocal EnableDelayedExpansion

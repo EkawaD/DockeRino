@@ -4,7 +4,8 @@ goto :eof
 
 
 :move_to_desktop
-echo Creating %~2 project on your Desktop...
+echo [95mRino[0m is creating [95m%~2[0m project on your Desktop ...
+echo.
 XCOPY "%install_dir%/.docker/%~1" "%USERPROFILE%\Desktop\%~2\" /s/h/e/k/f/c /Q 
 CD %USERPROFILE%\Desktop\%~2
 goto :eof
@@ -24,14 +25,17 @@ goto :eof
 
 :xampp
 call :move_to_desktop %app% %project_name%
-echo Starting the docker-compose file...
+echo [96m[INFO] Starting the docker-compose file ...[0m
+echo.
 CD %USERPROFILE%\Desktop\%project_name%
 echo PROJECT=%project_name% >> .env
 call :start_docker
 docker-compose up -d
 START http://127.0.0.1:80/www
-echo Web server is UP ! A localhost page should have started.
-echo You should read the README.md inside your folder project
+echo.
+echo [92m[SUCCESS] Web server is UP ! A [96mlocalhost[0m page should have started.[0m
+echo You should read the [96mREADME.md[0m  inside your folder project
+echo.
 CD %current%
 goto :eof
 
@@ -46,9 +50,8 @@ echo DATABASE_NAME=test >> .env
 echo MYSQL_USER=test >> .env
 echo MYSQL_PASSWORD=test >> .env
 echo DATABASE_URL="mysql://root:${DATABASE_ROOT_PASSWORD}@mysql:3306/${DATABASE_NAME}"  >> .env
-echo Finished !
 call :start_docker
-echo Starting the docker-compose file...
+echo [96m[INFO] Starting the docker-compose file ...[0m
 docker-compose build
 docker-compose up -d 
 docker exec %project_name%_symfony composer create-project symfony/website-skeleton app -n
@@ -58,32 +61,37 @@ DEL docker-compose.yml
 CD %USERPROFILE%\Desktop\%project_name%
 type .env >> app/.env
 START http://127.0.0.1:80
+echo [92m[SUCCESS] Web server is UP ! A [96mlocalhost[0m page should have started.[0m
+echo You should read the [96mREADME.md[0m  inside your folder project
 CD %current%
 goto :eof
 
 :python
 call :move_to_desktop %app% %project_name%
-echo Starting the docker-compose file...
+echo [96m[INFO] Starting the docker-compose file ...[0m
 CD %USERPROFILE%\Desktop\%project_name%
 echo PROJECT=%project_name% >> .env
 call :start_docker
 docker-compose up -d
-echo Python is ready
-echo You should read the README.md file !
+echo  [92m[SUCCESS] Python is ready ! [0m
+echo You should read the [96mREADME.md[0m file !
 CD %current%
 goto :eof
 
 
 :help
 echo How to use Rino : 
-echo rino update : update rino to latestt version
-echo rino help : Show this help
-echo rino start : start containers from current directory
-echo rino run [script] : run [script]
-echo rino [app] [project_name] : Create a new project
+echo -----------------
+echo   - [96mrino update[0m  : update rino to latest version
+echo   - [96mrino help[0m  : Show this help
+echo   - [96mrino start[0m  : start containers from current directory
+echo   - [96mrino run [script][0m  : run [script]
+echo   - [96mrino [app] [project_name][0m  : Create a new project
+echo.
 echo Available apps: 
+echo ---------------
 FOR %%G IN %list% DO ( 
-   echo %%G
+   echo   - %%G
 )
 goto :eof
 
