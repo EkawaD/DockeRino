@@ -1,3 +1,12 @@
+echo ^<ESC^>[90m [90mWhite[0m
+echo ^<ESC^>[91m [91mRed[0m
+echo ^<ESC^>[92m [92mGreen[0m
+echo ^<ESC^>[93m [93mYellow[0m
+echo ^<ESC^>[94m [94mBlue[0m
+echo ^<ESC^>[95m [95mMagenta[0m
+echo ^<ESC^>[96m [96mCyan[0m
+echo ^<ESC^>[97m [97mWhite[0m
+
 @echo Off
 setlocal EnableDelayedExpansion
 
@@ -41,7 +50,9 @@ goto :eof
 :start
 call %lib% start_docker
 call :is_container_started
-if not %started%==yes docker-compose up -d
+if not %started%==yes (
+    docker-compose up -d
+)
 goto :eof
 
 :get_params
@@ -65,7 +76,7 @@ for /F "tokens=*" %%i in ('docker ps --format {{.Names}}') do (
         goto :eof
     ) 
 )
-echo No container for this project is currently running, you should use [rino start] to be sure
+echo [91m [ERROR] No container for this project is currently running, you should use [rino start] to be sure [0m 
 goto :eof
 
 :get_app
