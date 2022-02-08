@@ -14,6 +14,7 @@ if !param1!==start (
 ) else if !param1!==run (
     call :start 
     if !process!==python (
+        ECHO ""
         docker exec -ti !container! python !param2!
     ) else (
         echo ERROR: This project is not a python project !
@@ -70,8 +71,6 @@ for %%G in %list% do (
 goto :eof
 
 :match
-echo %app%
-echo %project_name%
 if %~1==xampp (
     call %lib% xampp %app% %project_name%
 ) else if %~1==symfony (
