@@ -72,7 +72,7 @@ CD %USERPROFILE%\Desktop\!project_name!
 echo PROJECT=%project_name% >> .env
 call :start_docker
 docker-compose up -d
-echo [92m[SUCCEfetinetly SS] Python is ready ! [0m
+echo [92m[SUCCES] Python is ready ! [0m
 echo You should read the [96mREADME.md[0m file !
 CD %current%
 goto :eof
