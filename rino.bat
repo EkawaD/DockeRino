@@ -22,6 +22,7 @@ if !param1!==start (
     )
 ) else if  !param1!==update (
     call %lib% update
+    goto :eof
 ) else if  !param1!==help (
     call %lib% help 
 ) else (
