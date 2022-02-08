@@ -15,8 +15,10 @@ if "%ERRORLEVEL%"=="0" (
     echo Docker Desktop is running
 ) else (
     echo Starting docker deamon
-    start "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+    start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+    timeout 20
     echo Docker Desktop started !
+    
 )
 goto :eof
 
