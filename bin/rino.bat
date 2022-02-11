@@ -28,7 +28,7 @@ if !param1!==start (
         echo.
         echo [93m=== PYTHON RESPONSE ====================================================== [0m
         echo.
-        docker exec -ti !container! python !param2!
+        docker exec -ti !container! python -B !param2!
         echo.
         echo [93m========================================================================== [0m
         echo.
@@ -37,6 +37,10 @@ if !param1!==start (
     )
 ) else if  !param1!==update (
     call %lib% update
+    goto :eof
+) else if  !param1!==stop (
+    call :is_container_started
+    docker-compose down
     goto :eof
 ) else if  !param1!==help (
     call %lib% help 

@@ -84,6 +84,7 @@ echo -----------------
 echo   - [96mrino update[0m  : update rino to latest version
 echo   - [96mrino help[0m  : Show this help
 echo   - [96mrino start[0m  : start containers from current directory
+echo   - [96mrino stop[0m  : stop containers from current directory
 echo   - [96mrino run [script][0m  : run [script]
 echo   - [96mrino [app] [project_name][0m  : Create a new project
 echo.
