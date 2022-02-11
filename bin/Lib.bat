@@ -14,21 +14,21 @@ tasklist /fi "ImageName eq Docker Desktop.exe" /fo csv 2>NUL | find /I "Docker D
 if "%ERRORLEVEL%"=="0" (
     echo [92m[OK] Docker Desktop is running [0m
 ) else (
-    echo Starting docker Desktop...
+    echo [96m[INFO] Starting docker Desktop...[0m
     start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
     timeout 25 > nul
-    echo Docker Desktop started !
+    echo [92m[SUCCESS] Docker Desktop started ! [0m
 )
 goto :eof
 
 
 :xampp
+call :start_docker
 call :move_to_desktop %app% %project_name%
 echo [96m[INFO] Starting the docker-compose file ...[0m
 echo.
 CD %USERPROFILE%\Desktop\%project_name%
 echo PROJECT=%project_name% >> .env
-call :start_docker
 docker-compose up -d
 START http://127.0.0.1:80/www
 echo.
@@ -39,6 +39,7 @@ CD %current%
 goto :eof
 
 :symfony
+call :start_docker
 call :move_to_desktop %app% %project_name%
 CD %USERPROFILE%\Desktop\%project_name%
 echo BOILERPLATE=symfony >> .env
@@ -49,7 +50,6 @@ echo DATABASE_NAME=test >> .env
 echo MYSQL_USER=test >> .env
 echo MYSQL_PASSWORD=test >> .env
 echo DATABASE_URL="mysql://root:${DATABASE_ROOT_PASSWORD}@mysql:3306/${DATABASE_NAME}"  >> .env
-call :start_docker
 echo [96m[INFO] Starting the docker-compose file ...[0m
 docker-compose build
 docker-compose up -d 
@@ -66,11 +66,11 @@ CD %current%
 goto :eof
 
 :python
+call :start_docker
 call :move_to_desktop %app% !project_name!
 echo [96m[INFO] Starting the docker-compose file ...[0m
 CD %USERPROFILE%\Desktop\!project_name!
 echo PROJECT=%project_name% >> .env
-call :start_docker
 docker-compose up -d
 echo [92m[SUCCES] Python is ready ! [0m
 echo You should read the [96mREADME.md[0m file !
