@@ -33,7 +33,7 @@ if !param1!==start (
         echo [93m========================================================================== [0m
         echo.
     ) else (
-        echo [91m [ERROR] This project is not a python project ![0m
+        echo [91m[ERROR] This project is not a docker-python project ![0m
     )
 ) else if  !param1!==update (
     call %lib% update

@@ -30,7 +30,25 @@ You should now run
 docker exec -ti {project}_python python hello_world.py
 ```
 You should have an output like this 
+```
+[OK] Docker Desktop is running
+[OK] Rino found lol_python container
 
+=== PYTHON RESPONSE ======================================================
+
+Hello world !
+
+==========================================================================
+```
+
+Now, you can replace the hellow_world.py script by your own and run
 ```
 docker exec -ti {project}_python [script]
 ```
+
+If you use Rino you can alternatively do :
+```
+rino run [script]
+```
+
+Don't forget to look at https://github.com/EkawaD/DockeRino if you wanna use a framework like flask or django 
